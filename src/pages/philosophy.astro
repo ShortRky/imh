@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import AnimatedBackground from '../components/AnimatedBackground';
+
+const philosophyItems = [
+  {
+    category: 'Anime Philosophy',
+    quotes: [
+      { text: 'We are who we choose to be.', source: 'Golden Dark', anime: 'Unknown' },
+      { text: 'The only way to find true freedom is to break free from the cage you built yourself.', source: 'A Silent Voice' },
+      { text: 'It\'s not about who\'s right, it\'s about who\'s left.', source: 'Classroom of the Elite' },
+    ]
+  },
+  {
+    category: 'War Leaders',
+    quotes: [
+      { text: 'Know yourself and you will win all battles.', source: 'Sun Tzu', work: 'The Art of War' },
+      { text: 'War is the highest art of statecraft.', source: 'Sun Tzu', work: 'The Art of War' },
+      { text: 'The supreme art of war is to subdue the enemy without fighting.', source: 'Sun Tzu', work: 'The Art of War' },
+    ]
+  }
+];
+---
+
+<BaseLayout title="Philosophy | IMH">
+  <Navigation />
+  <AnimatedBackground client:load />
+  
+  <main class="relative z-10 pt-24 min-h-screen">
+    <section class="py-20 px-6">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="font-heading text-5xl md:text-6xl text-center mb-6 text-text-primary">
+          Philosophy
+        </h1>
+        <p class="font-body text-xl text-text-secondary text-center mb-16 max-w-2xl mx-auto">
+          Wisdom gathered from anime and the greatest military minds throughout history.
+        </p>
+        
+        {philosophyItems.map((section) => (
+          <div class="mb-16">
+            <h2 class="font-heading text-3xl text-accent mb-8 pb-4 border-b border-primary">
+              {section.category}
+            </h2>
+            <div class="space-y-6">
+              {section.quotes.map((quote, index) => (
+                <blockquote 
+                  class="bg-primary/20 backdrop-blur-sm border-l-4 border-accent p-6 rounded-r-lg hover:bg-primary/30 transition-all duration-300"
+                  style={`animation-delay: ${index * 100}ms`}
+                text-lg text-text-primary italic >
+                  <p class="font-body mb-4">
+                    "{quote.text}"
+                  </p>
+                  <footer class="font-body text-sm text-text-secondary">
+                    — {quote.source}
+                    {quote.work && <span class="text-text-secondary/60"> in {quote.work}</span>}
+                  </footer>
+                </blockquote>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+</BaseLayout>

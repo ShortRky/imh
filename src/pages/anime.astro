@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import AnimatedBackground from '../components/AnimatedBackground';
+
+const animeList = [
+  { title: 'Classroom of the Elite', genre: 'Psychological', rating: '9/10' },
+  { title: 'A Silent Voice', genre: 'Drama', rating: '10/10' },
+  { title: 'Attack on Titan', genre: 'Action', rating: '9/10' },
+  { title: 'Death Note', genre: 'Psychological', rating: '9/10' },
+];
+---
+
+<BaseLayout title="Anime | IMH">
+  <Navigation />
+  <AnimatedBackground client:load />
+  
+  <main class="relative z-10 pt-24 min-h-screen">
+    <section class="py-20 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="font-heading text-5xl md:text-6xl text-center mb-6 text-text-primary">
+          Anime
+        </h1>
+        <p class="font-body text-xl text-text-secondary text-center mb-16 max-w-2xl mx-auto">
+          Japanese animation that tells powerful stories.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {animeList.map((anime, index) => (
+            <div 
+              class="group bg-primary/30 border border-primary rounded-lg p-6 hover:border-accent/50 transition-all duration-300 hover:transform hover:-translate-y-2"
+              style={`animation-delay: ${index * 100}ms`}
+            >
+              <div class="flex justify-between items-start">
+                <div>
+                  <h3 class="font-heading text-xl text-text-primary group-hover:text-accent transition-colors duration-300">
+                    {anime.title}
+                  </h3>
+                  <p class="font-body text-text-secondary text-sm mt-2">
+                    {anime.genre}
+                  </p>
+                </div>
+                <span class="font-heading text-2xl text-accent">
+                  {anime.rating}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

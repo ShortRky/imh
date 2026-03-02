@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import AnimatedBackground from '../components/AnimatedBackground';
+
+const artPieces = [
+  { title: 'Digital Dreams', type: 'Digital', description: 'A exploration of digital landscapes' },
+  { title: 'Midnight Solitude', type: 'Digital', description: 'Embracing the quiet hours' },
+  { title: 'Neon Nights', type: 'Photography', description: 'City lights after dark' },
+  { title: 'Abstract Thoughts', type: 'Traditional', description: 'Freeform expression' },
+];
+---
+
+<BaseLayout title="Art & Photography | IMH">
+  <Navigation />
+  <AnimatedBackground client:load />
+  
+  <main class="relative z-10 pt-24 min-h-screen">
+    <section class="py-20 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="font-heading text-5xl md:text-6xl text-center mb-6 text-text-primary">
+          Art & Photography
+        </h1>
+        <p class="font-body text-xl text-text-secondary text-center mb-16 max-w-2xl mx-auto">
+          Visual creations that capture moments and emotions.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {artPieces.map((art, index) => (
+            <div 
+              class="group relative bg-primary/30 border border-primary rounded-lg overflow-hidden hover:border-accent/50 transition-all duration-500"
+              style={`animation-delay: ${index * 100}ms`}
+            >
+              <div class="aspect-square bg-gradient-to-br from-highlight/30 to-accent/20 flex items-center justify-center">
+                <span class="text-6xl opacity-30 group-hover:opacity-60 transition-opacity duration-300">
+                  🎨
+                </span>
+              </div>
+              <div class="p-6">
+                <span class="font-body text-xs text-accent uppercase tracking-wider">
+                  {art.type}
+                </span>
+                <h3 class="font-heading text-xl text-text-primary mt-2 mb-2 group-hover:text-accent transition-colors duration-300">
+                  {art.title}
+                </h3>
+                <p class="font-body text-text-secondary text-sm">
+                  {art.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

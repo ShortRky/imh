@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import AnimatedBackground from '../components/AnimatedBackground';
+
+const tracks = [
+  { title: 'Ethereal Dreams', artist: 'Various', genre: 'Ambient' },
+  { title: 'Midnight Jazz', artist: 'Unknown', genre: 'Jazz' },
+  { title: 'Electric Soul', artist: 'Various', genre: 'Electronic' },
+  { title: 'Classical Reflections', artist: 'Various', genre: 'Classical' },
+];
+---
+
+<BaseLayout title="Music | IMH">
+  <Navigation />
+  <AnimatedBackground client:load />
+  
+  <main class="relative z-10 pt-24 min-h-screen">
+    <section class="py-20 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="font-heading text-5xl md:text-6xl text-center mb-6 text-text-primary">
+          Music
+        </h1>
+        <p class="font-body text-xl text-text-secondary text-center mb-16 max-w-2xl mx-auto">
+          Sounds that resonate with the soul.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {tracks.map((track, index) => (
+            <div 
+              class="group bg-primary/30 border border-primary rounded-lg p-6 hover:border-accent/50 transition-all duration-300 hover:transform hover:-translate-y-2"
+              style={`animation-delay: ${index * 100}ms`}
+            >
+              <div class="w-full aspect-square bg-gradient-to-br from-highlight/30 to-accent/20 rounded-lg mb-4 flex items-center justify-center">
+                <span class="text-5xl opacity-50 group-hover:opacity-80 transition-opacity duration-300">
+                  🎵
+                </span>
+              </div>
+              <h3 class="font-heading text-lg text-text-primary group-hover:text-accent transition-colors duration-300">
+                {track.title}
+              </h3>
+              <p class="font-body text-text-secondary text-sm mt-1">
+                {track.artist}
+              </p>
+              <span class="font-body text-xs text-accent/70 mt-2 inline-block">
+                {track.genre}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import AnimatedBackground from '../components/AnimatedBackground';
+
+const games = [
+  { title: 'Strategic Minds', genre: 'Strategy', platform: 'PC' },
+  { title: 'Endless Adventures', genre: 'RPG', platform: 'Multi' },
+  { title: 'Quick Reflexes', genre: 'Action', platform: 'Console' },
+  { title: 'Mind Puzzles', genre: 'Puzzle', platform: 'PC' },
+];
+---
+
+<BaseLayout title="Games | IMH">
+  <Navigation />
+  <AnimatedBackground client:load />
+  
+  <main class="relative z-10 pt-24 min-h-screen">
+    <section class="py-20 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="font-heading text-5xl md:text-6xl text-center mb-6 text-text-primary">
+          Games
+        </h1>
+        <p class="font-body text-xl text-text-secondary text-center mb-16 max-w-2xl mx-auto">
+          Virtual worlds and interactive experiences.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {games.map((game, index) => (
+            <div 
+              class="group bg-primary/30 border border-primary rounded-lg overflow-hidden hover:border-accent/50 transition-all duration-500 hover:transform hover:scale-[1.02]"
+              style={`animation-delay: ${index * 100}ms`}
+            >
+              <div class="aspect-video bg-gradient-to-br from-highlight/30 to-accent/20 flex items-center justify-center">
+                <span class="text-6xl opacity-50 group-hover:opacity-80 transition-opacity duration-300">
+                  🎮
+                </span>
+              </div>
+              <div class="p-6">
+                <h3 class="font-heading text-xl text-text-primary group-hover:text-accent transition-colors duration-300">
+                  {game.title}
+                </h3>
+                <div class="flex gap-4 mt-3">
+                  <span class="font-body text-xs text-accent/70">
+                    {game.genre}
+                  </span>
+                  <span class="font-body text-xs text-text-secondary">
+                    {game.platform}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

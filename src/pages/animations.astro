@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import AnimatedBackground from '../components/AnimatedBackground';
+
+const animations = [
+  { title: 'Motion Studies', type: 'Experimental', author: 'Various' },
+  { title: 'Visual Journeys', type: 'Music Video', author: 'Various' },
+  { title: 'Character Animations', type: 'Short Film', author: 'Various' },
+  { title: 'Abstract Motion', type: 'Experimental', author: 'Various' },
+];
+---
+
+<BaseLayout title="Animations | IMH">
+  <Navigation />
+  <AnimatedBackground client:load />
+  
+  <main class="relative z-10 pt-24 min-h-screen">
+    <section class="py-20 px-6">
+      <div class="max-w-6xl mx-auto">
+        <h1 class="font-heading text-5xl md:text-6xl text-center mb-6 text-text-primary">
+          Animations
+        </h1>
+        <p class="font-body text-xl text-text-secondary text-center mb-16 max-w-2xl mx-auto">
+          Motion graphics and animated works that inspire.
+        </p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {animations.map((anim, index) => (
+            <div 
+              class="group bg-primary/30 border border-primary rounded-lg overflow-hidden hover:border-accent/50 transition-all duration-300"
+              style={`animation-delay: ${index * 100}ms`}
+            >
+              <div class="aspect-square bg-gradient-to-br from-highlight/30 to-accent/20 flex items-center justify-center">
+                <span class="text-5xl opacity-50 group-hover:opacity-80 transition-opacity duration-300 animate-pulse">
+                  ✨
+                </span>
+              </div>
+              <div class="p-4">
+                <h3 class="font-heading text-lg text-text-primary group-hover:text-accent transition-colors duration-300">
+                  {anim.title}
+                </h3>
+                <p class="font-body text-text-secondary text-xs mt-1">
+                  {anim.type}
+                </p>
+                <p class="font-body text-text-secondary/60 text-xs">
+                  by {anim.author}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

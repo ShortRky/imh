@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import AnimatedBackground from '../components/AnimatedBackground';
+
+const categories = [
+  { 
+    name: 'Philosophy', 
+    href: '/philosophy', 
+    description: 'Wisdom from anime and war leaders',
+    icon: '📜'
+  },
+  { 
+    name: 'Art & Photography', 
+    href: '/art', 
+    description: 'Visual creations and captures',
+    icon: '🎨'
+  },
+  { 
+    name: 'Music', 
+    href: '/music', 
+    description: 'Songs, albums, and artists',
+    icon: '🎵'
+  },
+  { 
+    name: 'Games', 
+    href: '/games', 
+    description: 'Video games and interactive experiences',
+    icon: '🎮'
+  },
+  { 
+    name: 'Anime', 
+    href: '/anime', 
+    description: 'Japanese animation and series',
+    icon: '⚔️'
+  },
+  { 
+    name: 'Animations', 
+    href: '/animations', 
+    description: 'Motion graphics and animations',
+    icon: '✨'
+  },
+];
+---
+
+<BaseLayout title="IMH | My Collection">
+  <Navigation />
+  <AnimatedBackground client:load />
+  
+  <main class="relative z-10 pt-24">
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col items-center justify-center px-6">
+      <div class="text-center max-w-4xl">
+        <h1 class="font-heading text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-text-primary via-highlight to-accent bg-clip-text text-transparent animate-pulse">
+          IMH
+        </h1>
+        <p class="font-body text-xl md:text-2xl text-text-secondary mb-4">
+          A collection of things I love
+        </p>
+        <p class="font-body text-lg text-text-secondary/70 max-w-2xl mx-auto">
+          Philosophy from anime and great minds. Art that moves me. Music that speaks. 
+          Games that challenge. Anime that inspires. Animations that amaze.
+        </p>
+      </div>
+      
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </div>
+    </section>
+    
+    <!-- Categories Section -->
+    <section class="py-20 px-6">
+      <h2 class="font-heading text-4xl text-center mb-16 text-text-primary">
+        Collections
+      </h2>
+      <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {categories.map((category, index) => (
+          <a 
+            href={category.href}
+            class="group relative bg-primary/30 backdrop-blur-sm border border-primary hover:border-accent/50 rounded-lg p-8 transition-all duration-500 hover:transform hover:scale-105"
+            style={`animation-delay: ${index * 100}ms`}
+          >
+            <div class="text-4xl mb-4">{category.icon}</div>
+            <h3 class="font-heading text-2xl text-text-primary mb-2 group-hover:text-accent transition-colors duration-300">
+              {category.name}
+            </h3>
+            <p class="font-body text-text-secondary">
+              {category.description}
+            </p>
+            <div class="absolute inset-0 bg-gradient-to-r from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg" />
+          </a>
+        ))}
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-10 px-6 border-t border-primary">
+      <div class="max-w-6xl mx-auto text-center">
+        <p class="font-body text-text-secondary text-sm">
+          Built with intention • 2026
+        </p>
+      </div>
+    </footer>
+  </main>
+</BaseLayout>
